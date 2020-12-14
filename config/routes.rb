@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   end
 
   namespace :api do 
+    resources :eateries do 
     resources :menus
+    end
   end
 
 end
