@@ -1,21 +1,22 @@
 import { useState, useEffect } from "react"
 import axios from 'axios';
-import Eatery from "./Eatery";
+import Menu from "./Menu";
 import { Container, Header, Segment, Dimmer, Loader } from "semantic-ui-react";
 
-const Eateries = () => {
-  const [eatery, setEatery] = useState([])
+const Menus = () => {
+  const [menus, setMenus] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
+  // const [eateryId, setEateryID] = useState(match.params.id)
 
   useEffect(()=>{
-    getEateries()
+    getMenus()
   },[])
 
-  const getEateries = async () => {
+  const getMenus = async () => {
     try {
-      let res = await axios.get("/api/eateries")
-      setEatery(res.data)
+      let res = await axios.get(`/api/a/eateries/all_menus`)
+      setMenus(res.data)
       console.log(res)
 
     } catch (err) {
@@ -30,21 +31,20 @@ const Eateries = () => {
 
 
 
-  const renderEateries = () => {
+  const renderMenus = () => {
     if (loading) return (
       <Segment>
       <Dimmer active>
         <Loader />
       </Dimmer>
     </Segment>
-    
       )
     if (error) return <p> Error </p>
 
-    return eatery.map((e)=>{
+    return menus.map((m)=>{
       return (
         <>
-          <Eatery name={e.name} category={e.category} id={e.id} rating={e.rating}/>
+          <Menu category={m.category} id={m.id} rating={m.rating} eateryId = {m.eatery_id}/>
         </>
       )
     })
@@ -52,13 +52,13 @@ const Eateries = () => {
 
   return (
     <>
-      <Header style={{marginTop: "30px"}} textAlign="center" as="h1">Favorite Restaurants</Header>
+      <Header style={{marginTop: "30px"}} textAlign="center" as="h1">Favorite Menus</Header>
       <Container style={{overFlow: 'auto', whiteSpace: 'nowrap', overflowX: "scroll"}}>
-      {renderEateries()}
+      {renderMenus()}
       </Container>
     </>
   )
 
 }
 
-export default Eateries
+export default Menus

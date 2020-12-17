@@ -3,9 +3,13 @@ class Api::EateriesController < ApplicationController
     render json: Eatery.all
   end
 
+  def all_menus
+    render json: Menu.all
+  end
+
   def show
-    eatery = Eatery.find(params[:id])
-    render json: eatery
+      eatery = Eatery.find(params[:id])
+      render json: eatery
   end 
 
   def create

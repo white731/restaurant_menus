@@ -10,4 +10,6 @@ Rails.application.routes.draw do
     end
   end
 
+  get "api/a/eateries/all_menus", to: "api/eateries#all_menus"
+
 end

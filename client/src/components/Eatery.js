@@ -1,6 +1,11 @@
-import { Container, Header, Card, Image, Icon } from 'semantic-ui-react'
+import {Card, Image, Icon } from 'semantic-ui-react'
 
 const Eatery = ({id, name, category, rating}) => {
+
+const stars = () => {
+   for (let i=0; i<rating; i++) {
+     return <Icon name='star' />}
+}
 
   return(
     
@@ -14,7 +19,7 @@ const Eatery = ({id, name, category, rating}) => {
     </Card.Content>
     <Card.Content extra>
       <a>
-        <Icon name='user' />
+       {stars()}
         Rating: {rating}
       </a>
     </Card.Content>
